@@ -1,0 +1,439 @@
+<html>
+<!-- Online page at "https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview" -->
+
+<head>
+	<link href="./bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body class="container">
+	<main id="main" class="" role="main" data-bi-name="content" lang="en-us" dir="ltr">
+		<div class="content ">
+			<h1 id="what-are-arm-templates">What are ARM templates?</h1>
+
+			<div id="ms--inline-notifications" data-bi-name="inline-notification"></div>
+
+			<nav id="center-doc-outline" class="doc-outline display-none-print margin-bottom-sm"
+				data-bi-name="intopic toc" aria-label="In this article"><!---->
+				<h2 id="ms--in-this-article" class="title is-6 margin-block-xs"><!---->In this article<!----></h2>
+				<ol id="content-well-in-this-article-list" class="border-left padding-left-xxs">
+					<!---->
+					<li class="">
+						<a
+							href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview#why-choose-arm-templates"><!---->Why
+							choose ARM templates?<!----></a>
+					</li>
+					<!---->
+					<li class="">
+						<a
+							href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview#template-file"><!---->Template
+							file<!----></a>
+					</li>
+					<!---->
+					<li class="">
+						<a
+							href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview#template-deployment-process"><!---->Template
+							deployment process<!----></a>
+					</li>
+					<!---->
+					<li class="">
+						<a
+							href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview#template-design"><!---->Template
+							design<!----></a>
+					</li>
+					<!---->
+					<li class="expandable is-expanded">
+						<a
+							href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview#share-templates"><!---->Share
+							templates<!----></a>
+					</li>
+					<!---->
+					<li class="expandable is-expanded">
+						<a
+							href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview#next-steps"><!---->Next
+							steps<!----></a>
+					</li>
+					<!---->
+				</ol>
+
+			</nav>
+
+			<!-- <content> -->
+			<p>With the move to the cloud, many teams have adopted agile development methods. These teams iterate
+				quickly.
+				They need to repeatedly deploy their solutions to the cloud, and know their infrastructure is in a
+				reliable
+				state. As infrastructure has become part of the iterative process, the division between operations and
+				development has disappeared. Teams need to manage infrastructure and application code through a unified
+				process.</p>
+			<p>To meet these challenges, you can automate deployments and use the practice of infrastructure as code. In
+				code, you define the infrastructure that needs to be deployed. The infrastructure code becomes part of
+				your
+				project. Just like application code, you store the infrastructure code in a source repository and
+				version
+				it. Anyone on your team can run the code and deploy similar environments.</p>
+			<p>To implement infrastructure as code for your Azure solutions, use Azure Resource Manager templates (ARM
+				templates). The template is a JavaScript Object Notation (JSON) file that defines the infrastructure and
+				configuration for your project. The template uses declarative syntax, which lets you state what you
+				intend
+				to deploy without having to write the sequence of programming commands to create it. In the template,
+				you
+				specify the resources to deploy and the properties for those resources.</p>
+			<div class="alert is-success">
+				<p class="alert-title"><span class="docon docon-lightbulb" aria-hidden="true"></span> Tip</p>
+				<p>We've introduced a new language named <a
+						href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview"
+						data-linktype="relative-path">Bicep</a> that offers the same capabilities as ARM templates but
+					with
+					a syntax that's easier to use. Each Bicep file is automatically converted to an ARM template during
+					deployment. If you're considering infrastructure as code options, we recommend looking at Bicep. For
+					more information, see <a
+						href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview"
+						data-linktype="relative-path">What is Bicep?</a>.</p>
+			</div>
+			<div class="heading-wrapper" data-heading-level="h2"><a class="anchor-link docon docon-link"
+					href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview#why-choose-arm-templates"
+					aria-label="Section titled: Why choose ARM templates?"></a>
+				<h2 id="why-choose-arm-templates" class="heading-anchor">Why choose ARM templates?</h2>
+			</div>
+			<p>If you're trying to decide between using ARM templates and one of the other infrastructure as code
+				services,
+				consider the following advantages of using templates:</p>
+			<ul>
+				<li>
+					<p><strong>Declarative syntax</strong>: ARM templates allow you to create and deploy an entire Azure
+						infrastructure declaratively. For example, you can deploy not only virtual machines, but also
+						the
+						network infrastructure, storage systems, and any other resources you may need.</p>
+				</li>
+				<li>
+					<p><strong>Repeatable results</strong>: Repeatedly deploy your infrastructure throughout the
+						development
+						lifecycle and have confidence your resources are deployed in a consistent manner. Templates are
+						idempotent, which means you can deploy the same template many times and get the same resource
+						types
+						in the same state. You can develop one template that represents the desired state, rather than
+						developing lots of separate templates to represent updates.</p>
+				</li>
+				<li>
+					<p><strong>Orchestration</strong>: You don't have to worry about the complexities of ordering
+						operations. Resource Manager orchestrates the deployment of interdependent resources so they're
+						created in the correct order. When possible, Resource Manager deploys resources in parallel so
+						your
+						deployments finish faster than serial deployments. You deploy the template through one command,
+						rather than through multiple imperative commands.</p>
+					<p><span class="mx-imgBorder">
+							<img src="./index_files/template-processing.png"
+								alt="Diagram that shows the difference between imperative and declarative deployment."
+								data-linktype="relative-path">
+						</span>
+					</p>
+				</li>
+				<li>
+					<p><strong>Modular files</strong>: You can break your templates into smaller, reusable components
+						and
+						link them together at deployment time. You can also nest one template inside another template.
+					</p>
+				</li>
+				<li>
+					<p><strong>Create any Azure resource</strong>: You can immediately use new Azure services and
+						features
+						in templates. As soon as a resource provider introduces new resources, you can deploy those
+						resources through templates. You don't have to wait for tools or modules to be updated before
+						using
+						the new services.</p>
+				</li>
+				<li>
+					<p><strong>Extensibility</strong>: With <a
+							href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-script-template"
+							data-linktype="relative-path">deployment scripts</a>, you can add PowerShell or Bash scripts
+						to
+						your templates. The deployment scripts extend your ability to set up resources during
+						deployment. A
+						script can be included in the template, or stored in an external source and referenced in the
+						template. Deployment scripts give you the ability to complete your end-to-end environment setup
+						in a
+						single ARM template.</p>
+				</li>
+				<li>
+					<p><strong>Testing</strong>: You can make sure your template follows recommended guidelines by
+						testing
+						it with the ARM template tool kit (arm-ttk). This test kit is a PowerShell script that you can
+						download from <a href="https://github.com/Azure/arm-ttk" data-linktype="external">GitHub</a>.
+						The
+						tool kit makes it easier for you to develop expertise using the template language.</p>
+				</li>
+				<li>
+					<p><strong>Preview changes</strong>: You can use the <a
+							href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-what-if"
+							data-linktype="relative-path">what-if operation</a> to get a preview of changes before
+						deploying
+						the template. With what-if, you see which resources will be created, updated, or deleted, and
+						any
+						resource properties that will be changed. The what-if operation checks the current state of your
+						environment and eliminates the need to manage state.</p>
+				</li>
+				<li>
+					<p><strong>Built-in validation</strong>: Your template is deployed only after passing validation.
+						Resource Manager checks the template before starting the deployment to make sure the deployment
+						will
+						succeed. Your deployment is less likely to stop in a half-finished state.</p>
+				</li>
+				<li>
+					<p><strong>Tracked deployments</strong>: In the Azure portal, you can review the deployment history
+						and
+						get information about the template deployment. You can see the template that was deployed, the
+						parameter values passed in, and any output values. Other infrastructure as code services aren't
+						tracked through the portal.</p>
+					<p><span class="mx-imgBorder">
+							<img src="./index_files/deployment-history.png"
+								alt="Screenshot of the Azure portal showing deployment history."
+								data-linktype="relative-path">
+						</span>
+					</p>
+				</li>
+				<li>
+					<p><strong>Policy as code</strong>: <a
+							href="https://learn.microsoft.com/en-us/azure/governance/policy/overview"
+							data-linktype="relative-path">Azure Policy</a> is a policy as code framework to automate
+						governance. If you're using Azure policies, policy remediation is done on non-compliant
+						resources
+						when deployed through templates.</p>
+				</li>
+				<li>
+					<p><strong>Deployment Blueprints</strong>: You can take advantage of <a
+							href="https://learn.microsoft.com/en-us/azure/governance/blueprints/overview"
+							data-linktype="relative-path">Blueprints</a> provided by Microsoft to meet regulatory and
+						compliance standards. These blueprints include pre-built templates for various architectures.
+					</p>
+				</li>
+				<li>
+					<p><strong>CI/CD integration</strong>: You can integrate templates into your continuous integration
+						and
+						continuous deployment (CI/CD) tools, which can automate your release pipelines for fast and
+						reliable
+						application and infrastructure updates. By using Azure DevOps and Resource Manager template
+						task,
+						you can use Azure Pipelines to continuously build and deploy ARM template projects. To learn
+						more,
+						see <a
+							href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/add-template-to-azure-pipelines"
+							data-linktype="relative-path">VS project with pipelines</a> and <a
+							href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deployment-tutorial-pipeline"
+							data-linktype="relative-path">Tutorial: Continuous integration of Azure Resource Manager
+							templates with Azure Pipelines</a>.</p>
+				</li>
+				<li>
+					<p><strong>Exportable code</strong>: You can get a template for an existing resource group by either
+						exporting the current state of the resource group, or viewing the template used for a particular
+						deployment. Viewing the <a
+							href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/export-template-portal"
+							data-linktype="relative-path">exported template</a> is a helpful way to learn about the
+						template
+						syntax.</p>
+				</li>
+				<li>
+					<p><strong>Authoring tools</strong>: You can author templates with <a
+							href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/quickstart-create-templates-use-visual-studio-code"
+							data-linktype="relative-path">Visual Studio Code</a> and the template tool extension. You
+						get
+						intellisense, syntax highlighting, in-line help, and many other language functions. In addition
+						to
+						Visual Studio Code, you can also use <a
+							href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/create-visual-studio-deployment-project"
+							data-linktype="relative-path">Visual Studio</a>.</p>
+				</li>
+			</ul>
+			<div class="heading-wrapper" data-heading-level="h2"><a class="anchor-link docon docon-link"
+					href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview#template-file"
+					aria-label="Section titled: Template file"></a>
+				<h2 id="template-file" class="heading-anchor">Template file</h2>
+			</div>
+			<p>Within your template, you can write <a
+					href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/template-expressions"
+					data-linktype="relative-path">template expressions</a> that extend the capabilities of JSON. These
+				expressions make use of the <a
+					href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/template-functions"
+					data-linktype="relative-path">functions</a> provided by Resource Manager.</p>
+			<p>The template has the following sections:</p>
+			<ul>
+				<li>
+					<p><a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/parameters"
+							data-linktype="relative-path">Parameters</a> - Provide values during deployment that allow
+						the
+						same template to be used with different environments.</p>
+				</li>
+				<li>
+					<p><a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/variables"
+							data-linktype="relative-path">Variables</a> - Define values that are reused in your
+						templates.
+						They can be constructed from parameter values.</p>
+				</li>
+				<li>
+					<p><a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/user-defined-functions"
+							data-linktype="relative-path">User-defined functions</a> - Create customized functions that
+						simplify your template.</p>
+				</li>
+				<li>
+					<p><a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/resource-declaration"
+							data-linktype="relative-path">Resources</a> - Specify the resources to deploy.</p>
+				</li>
+				<li>
+					<p><a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/outputs"
+							data-linktype="relative-path">Outputs</a> - Return values from the deployed resources.</p>
+				</li>
+			</ul>
+			<div class="heading-wrapper" data-heading-level="h2"><a class="anchor-link docon docon-link"
+					href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview#template-deployment-process"
+					aria-label="Section titled: Template deployment process"></a>
+				<h2 id="template-deployment-process" class="heading-anchor">Template deployment process</h2>
+			</div>
+			<p>When you deploy a template, Resource Manager converts the template into REST API operations. For example,
+				when Resource Manager receives a template with the following resource definition:</p>
+			<div class="codeHeader" id="code-try-0" data-bi-name="code-header"><span class="language">JSON</span>
+			</div>
+			<pre class="text-bg-light" id="json-data"><code class="lang-json">
+{
+	"resources": [
+	{
+		"type": "Microsoft.Storage/storageAccounts",
+		"apiVersion": "2022-09-01",
+		"name": "mystorageaccount",
+		"location": "centralus",
+		"sku": {
+		"name": "Standard_LRS"
+		},
+		"kind": "StorageV2"
+	}
+	]
+}
+			</code>
+			</pre>
+			<p>It converts the definition to the following REST API operation, which is sent to the Microsoft.Storage
+				resource provider:</p>
+			<div class="codeHeader" id="code-try-1" data-bi-name="code-header"><span class="language">HTTP</span>
+			</div>
+			<pre class="text-bg-light" id="http-data"><code class="lang-http">
+PUT
+https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/mystorageaccount?api-version=2022-09-01
+REQUEST BODY
+{
+	"location": "centralus",
+	"sku": {
+	"name": "Standard_LRS"
+	},
+	"kind": "StorageV2",
+	"properties": {}
+}
+			</code></pre>
+			<p>Notice that the <strong>apiVersion</strong> you set in the template for the resource is used as the API
+				version for the REST operation. You can repeatedly deploy the template and have confidence it will
+				continue
+				to work. By using the same API version, you don't have to worry about breaking changes that might be
+				introduced in later versions.</p>
+			<p>To deploy a template, use any of the following options:</p>
+			<ul>
+				<li><a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-portal"
+						data-linktype="relative-path">Azure portal</a></li>
+				<li><a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-cli"
+						data-linktype="relative-path">Azure CLI</a></li>
+				<li><a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-powershell"
+						data-linktype="relative-path">PowerShell</a></li>
+				<li><a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-rest"
+						data-linktype="relative-path">REST API</a></li>
+				<li><a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-to-azure-button"
+						data-linktype="relative-path">Button in GitHub repository</a></li>
+				<li><a href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/deploy-cloud-shell"
+						data-linktype="relative-path">Azure Cloud Shell</a></li>
+			</ul>
+			<div class="heading-wrapper" data-heading-level="h2"><a class="anchor-link docon docon-link"
+					href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview#template-design"
+					aria-label="Section titled: Template design"></a>
+				<h2 id="template-design" class="heading-anchor">Template design</h2>
+			</div>
+			<p>How you define templates and resource groups is entirely up to you and how you want to manage your
+				solution.
+				For example, you can deploy your three tier application through a single template to a single resource
+				group.</p>
+			<p><span class="mx-imgBorder">
+					<img src="./index_files/3-tier-template.png"
+						alt="Diagram that shows a three-tier application deployment using a single template."
+						data-linktype="relative-path">
+				</span>
+			</p>
+			<p>But, you don't have to define your entire infrastructure in a single template. Often, it makes sense to
+				divide your deployment requirements into a set of targeted, purpose-specific templates. You can easily
+				reuse
+				these templates for different solutions. To deploy a particular solution, you create a main template
+				that
+				links all the required templates. The following image shows how to deploy a three tier solution through
+				a
+				parent template that includes three nested templates.</p>
+			<p><span class="mx-imgBorder">
+					<img src="./index_files/nested-tiers-template.png"
+						alt="Diagram that shows a three-tier application deployment using nested templates."
+						data-linktype="relative-path">
+				</span>
+			</p>
+			<p>If you envision your tiers having separate lifecycles, you can deploy your three tiers to separate
+				resource
+				groups. Notice the resources can still be linked to resources in other resource groups.</p>
+			<p><span class="mx-imgBorder">
+					<img src="./index_files/tier-templates.png"
+						alt="Diagram that shows a three-tier application deployment with separate resource groups."
+						data-linktype="relative-path">
+				</span>
+			</p>
+			<p>For information about nested templates, see <a
+					href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/linked-templates"
+					data-linktype="relative-path">Using linked templates with Azure Resource Manager</a>.</p>
+			<div class="heading-wrapper" data-heading-level="h2"><a class="anchor-link docon docon-link"
+					href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview#share-templates"
+					aria-label="Section titled: Share templates"></a>
+				<h2 id="share-templates" class="heading-anchor">Share templates</h2>
+			</div>
+			<p>After creating your template, you may wish to share it with other users in your organization. <a
+					href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/template-specs"
+					data-linktype="relative-path">Template specs</a> enable you to store a template as a resource type.
+				You
+				use role-based access control to manage access to the template spec. Users with read access to the
+				template
+				spec can deploy it, but not change the template.</p>
+			<p>This approach means you can safely share templates that meet your organization's standards.</p>
+			<div class="heading-wrapper" data-heading-level="h2"><a class="anchor-link docon docon-link"
+					href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview#next-steps"
+					aria-label="Section titled: Next steps"></a>
+				<h2 id="next-steps" class="heading-anchor">Next steps</h2>
+			</div>
+			<ul>
+				<li>For a step-by-step tutorial that guides you through the process of creating a template, see <a
+						href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/template-tutorial-create-first-template"
+						data-linktype="relative-path">Tutorial: Create and deploy your first ARM template</a>.</li>
+				<li>To learn about ARM templates through a guided set of Learn modules, see <a
+						href="https://learn.microsoft.com/en-us/training/paths/deploy-manage-resource-manager-templates/"
+						data-linktype="absolute-path">Deploy and manage resources in Azure by using ARM templates</a>.
+				</li>
+				<li>For information about the properties in template files, see <a
+						href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/syntax"
+						data-linktype="relative-path">Understand the structure and syntax of ARM templates</a>.</li>
+				<li>To learn about exporting templates, see <a
+						href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/quickstart-create-templates-use-the-portal"
+						data-linktype="relative-path">Quickstart: Create and deploy ARM templates by using the Azure
+						portal</a>.</li>
+				<li>For answers to common questions, see <a
+						href="https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/frequently-asked-questions"
+						data-linktype="relative-path">Frequently asked questions about ARM templates</a>.</li>
+			</ul>
+
+		</div>
+
+		<div id="assertive-live-region" role="alert" aria-live="assertive" class="visually-hidden"
+			aria-relevant="additions" aria-atomic="true"></div>
+		<div id="polite-live-region" role="status" aria-live="polite" class="visually-hidden" aria-relevant="additions"
+			aria-atomic="true"></div>
+		<!-- </content> -->
+
+	</main>
+
+</body>
+
+</html>
