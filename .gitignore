@@ -2,9 +2,9 @@ downloaded_pages/*
 TODO.md
 .DS_Store
 docSet.dsidx
-Azure.docset/Contents/Resources/optimizedIndex.dsidx
-Azure.docset/Contents/Resources/searchKitIndex.dsidx
+Azure_Resource_Manager_Template_Reference.docset/Contents/Resources/optimizedIndex.dsidx
+Azure_Resource_Manager_Template_Reference.docset/Contents/Resources/searchKitIndex.dsidx
 
 # all html files except the index.html
-Azure.docset/Contents/Resources/Documents/*.html
-!Azure.docset/Contents/Resources/Documents/index.html
+Azure_Resource_Manager_Template_Reference.docset/Contents/Resources/Documents/*.html
+!Azure_Resource_Manager_Template_Reference.docset/Contents/Resources/Documents/index.html

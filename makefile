@@ -6,7 +6,7 @@ SOURCE_FILE = main.py
 REQUIREMENTS = requirements.txt
 DB_FILE = docSet.dsidx
 DOWNLOAD_DIR = downloaded_pages
-DOCSET_DIR = ./Azure.docset/Contents/Resources
+DOCSET_DIR = ./Azure_Resource_Manager_Template_Reference.docset/Contents/Resources
 
 install:
 	$(PIP) install -r $(REQUIREMENTS)
@@ -17,7 +17,7 @@ run: install
 build: run
 	cp $(DB_FILE) $(DOCSET_DIR)/$(DB_FILE)
 	cp -r $(DOWNLOAD_DIR)/*.html $(DOCSET_DIR)/Documents/
-	tar --exclude='.DS_Store' -cvzf Azure.tgz Azure.docset
+	tar --exclude='.DS_Store' -cvzf Azure_Resource_Manager_Template_Reference.tgz Azure_Resource_Manager_Template_Reference.docset
 
 clean:
 	rm -f $(DB_FILE)
