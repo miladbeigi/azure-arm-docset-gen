@@ -1,3 +1,10 @@
 downloaded_pages/*
-TODO
+TODO.md
 .DS_Store
+docSet.dsidx
+Azure.docset/Contents/Resources/optimizedIndex.dsidx
+Azure.docset/Contents/Resources/searchKitIndex.dsidx
+
+# all html files except the index.html
+Azure.docset/Contents/Resources/Documents/*.html
+!Azure.docset/Contents/Resources/Documents/index.html
