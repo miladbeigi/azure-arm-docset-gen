@@ -14,7 +14,7 @@ install:
 run: install
 	$(PYTHON) $(SOURCE_FILE)
 
-build: run
+build:
 	cp $(DB_FILE) $(DOCSET_DIR)/$(DB_FILE)
 	cp -r $(DOWNLOAD_DIR)/*.html $(DOCSET_DIR)/Documents/
 	tar --exclude='.DS_Store' -cvzf Azure_Resource_Manager_Template_Reference.tgz Azure_Resource_Manager_Template_Reference.docset
