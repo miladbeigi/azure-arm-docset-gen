@@ -134,6 +134,7 @@ def download_single_page(link: str, folder_name: str) -> None:
     add_pre_class(new_html)
     add_resource_link(new_html)
     replace_relative_paths(new_html, link)
+    replace_src_image(new_html)
     file_name = save_html_file(new_html, link, folder_name)
     return (resource_title, "Resource", file_name)
 
@@ -210,6 +211,13 @@ def add_resource_link(new_html: BeautifulSoup) -> None:
 def replace_relative_paths(new_html: BeautifulSoup, link: str) -> None:
     for a in new_html.find_all("a", {"data-linktype": "relative-path"}):
         a["href"] = link
+
+
+def replace_src_image(new_html: BeautifulSoup) -> None:
+    for img in new_html.find_all(
+        "img", {"data-linktype": "relative-path", "alt": "Deploy to Azure"}
+    ):
+        img["src"] = "./index_files/deploy-to-azure.svg"
 
 
 def save_html_file(new_html: BeautifulSoup, link: str, folder_name: str) -> None:
